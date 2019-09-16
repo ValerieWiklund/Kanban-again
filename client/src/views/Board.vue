@@ -1,5 +1,6 @@
 <template>
   <div class="board">{{board.title}}</div>
+  <list />
 </template>
 
 <script>
@@ -13,6 +14,9 @@ export default {
           title: "Loading..."
         }
       );
+    },
+    lists() {
+      return this.$store.state.lists;
     }
   },
   props: ["boardId"]

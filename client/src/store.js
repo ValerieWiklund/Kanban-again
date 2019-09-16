@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Axios from 'axios'
 import router from './router'
 import AuthService from './AuthService'
+import { getMaxListeners, setMaxListeners } from 'cluster'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
-    activeBoard: {}
+    activeBoard: {},
+    lists: []
   },
   mutations: {
     setUser(state, user) {
@@ -27,6 +29,9 @@ export default new Vuex.Store({
     },
     setBoards(state, boards) {
       state.boards = boards
+    },
+    setLists(state, lists) {
+      state.lists = lists
     }
   },
   actions: {
@@ -79,8 +84,15 @@ export default new Vuex.Store({
 
 
     //#region -- LISTS --
+getLists({ commit, dispatch }) {
+      try {
+        let res = await api.get('lists')
+        commit('setLists', res.data)
+      } catch (error) {
 
+      }
 
+    }
 
     //#endregion
   }
