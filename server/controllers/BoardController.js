@@ -36,7 +36,7 @@ export default class BoardsController {
   async getAllLists(req, res, next) {
     try {
       //only gets boards by user who is logged in
-      let data = await _listService.find({ boardId: req.params.boardId })
+      let data = await _listService.find({ boardId: req.params.id })
       return res.send(data)
     }
     catch (err) { next(err) }
@@ -56,6 +56,8 @@ export default class BoardsController {
       return res.status(201).send(data)
     } catch (error) { next(error) }
   }
+
+
 
   async edit(req, res, next) {
     try {

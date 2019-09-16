@@ -11,9 +11,9 @@ export default class ListController {
       .use(Authorize.authenticated)
       //.get('/:id/tasks', this.getAllTasks)
       // .get('/:id', this.getById)
-      .post('', this.create)
-    // .put('/:id', this.edit)
-    // .delete('/:id', this.delete)
+      .post('/', this.create)
+      // .put('/:id', this.edit)
+      .delete('/:id', this.delete)
     // .use(this.defaultRoute)
   }
 
@@ -21,11 +21,23 @@ export default class ListController {
 
   async create(req, res, next) {
     try {
+      req.body.authorId = req.session.uid
       let newList = await _listService.create(req.body)
       return res.send(newList)
     }
     catch (err) { next(err) }
   }
 
+  async delete(req, res, next) {
+    try {
+      let data = await _listService.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      if (data) {
+        return res.send("List Deleted")
+      }
+    }
+    catch (err) { next(err) }
+  }
 
 }
+
+
