@@ -15,6 +15,7 @@ export default class TaskController {
       // .get('/:id/tasks', this.getAllTasks)
       // .get('/:id', this.getById)
       .post('', this.create)
+      // .post('/:id/comments', this.createComment)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
     // .use(this.defaultRoute)
@@ -30,6 +31,16 @@ export default class TaskController {
       console.error(error)
     }
   }
+
+  // async createComment(req, res, next) {
+  //   try {
+  //     let data = await _taskService.
+
+  //   } catch (error) {
+  //     console.error(error)
+
+  //   }
+  // }
   async edit(req, res, next) {
     try {
       let data = await _taskService.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, req.body, { new: true })
