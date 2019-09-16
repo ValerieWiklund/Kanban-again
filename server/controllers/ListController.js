@@ -2,14 +2,17 @@ import _boardService from '../services/BoardService'
 import express from 'express'
 import { Authorize } from '../middleware/authorize.js'
 import ListService from '../services/ListService'
+import TaskService from '../services/TaskService'
+
 
 let _listService = new ListService().repository
+let _taskService = new TaskService().repository
 
 export default class ListController {
   constructor() {
     this.router = express.Router()
       .use(Authorize.authenticated)
-      //.get('/:id/tasks', this.getAllTasks)
+      .get('/:id/tasks', this.getAllTasks)
       // .get('/:id', this.getById)
       .post('/', this.create)
       // .put('/:id', this.edit)
@@ -18,7 +21,14 @@ export default class ListController {
   }
 
 
-
+  async getAllTasks(req, res, next) {
+    try {
+      let data = await _taskService.find({ listId: req.params.id })
+      return res.send(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
   async create(req, res, next) {
     try {
       req.body.authorId = req.session.uid
