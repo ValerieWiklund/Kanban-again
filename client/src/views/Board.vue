@@ -1,16 +1,36 @@
 <template>
-  <div class="board">{{board.title}}</div>
-  <list />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="board">
+        {{board.title}}
+        <CreateListModal />
+        <button
+          class="btn btn-success"
+          data-toggle="modal"
+          data-target="#create-list-modal"
+        >Create List</button>
+        <list v-for="list in lists" :listProp="list" :key="list._id" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import List from "../components/List";
+import CreateListModal from "../components/CreateListModal";
 export default {
   name: "board",
+  mounted() {
+    this.$store.dispatch("getActiveBoard", this.$route.params.boardId);
+    this.$store.dispatch("getBoards");
+    this.$store.dispatch("getLists", this.$route.params.boardId);
+  },
   computed: {
     board() {
       return (
-        //FIXME This does not work on page reload because the boards array is empty in the store
-        this.$store.state.boards.find(b => b._id == this.boardId) || {
+        this.$store.state.boards.find(
+          b => b._id == this.$route.params.boardId
+        ) || {
           title: "Loading..."
         }
       );
@@ -19,6 +39,6 @@ export default {
       return this.$store.state.lists;
     }
   },
-  props: ["boardId"]
+  components: { List, CreateListModal }
 };
 </script>

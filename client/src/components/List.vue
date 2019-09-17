@@ -1,15 +1,27 @@
 <template>
-  <h1>this is the list</h1>
+  <div>
+    <h1>{{listProp.title}}</h1>
+    <task v-for="task in tasks" :taskProp="task" :key="task._id" />
+  </div>
 </template>
 
-<script>
-export default {
-  name: 'List'
 
-}
-mounted (){
-  this.$store.dispatch('getLists')
-}
+<script>
+import Task from "../components/Task";
+export default {
+  name: "List",
+  props: ["listProp"],
+  mounted() {
+    this.$store.dispatch("getTasks", this.listProp._id);
+  },
+
+  computed: {
+    tasks() {
+      return this.$store.state.tasks;
+    }
+  },
+  components: { Task }
+};
 </script>
 
 <style scoped>

@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Axios from 'axios'
 import router from './router'
 import AuthService from './AuthService'
-import { getMaxListeners, setMaxListeners } from 'cluster'
+// import { getMaxListeners, setMaxListeners } from 'cluster'
 
 Vue.use(Vuex)
 
@@ -21,17 +21,25 @@ export default new Vuex.Store({
     user: {},
     boards: [],
     activeBoard: {},
-    lists: []
+    lists: [],
+    tasks: [],
   },
   mutations: {
     setUser(state, user) {
       state.user = user
     },
-    setBoards(state, boards) {
-      state.boards = boards
+    setBoards(state, data) {
+      state.boards = data
     },
-    setLists(state, lists) {
-      state.lists = lists
+
+    setActiveBoard(state, data) {
+      state.activeBoard = data
+    },
+    setLists(state, data) {
+      state.lists = data
+    },
+    setTasks(state, data) {
+      state.tasks = data
     }
   },
   actions: {
@@ -74,24 +82,55 @@ export default new Vuex.Store({
           commit('setBoards', res.data)
         })
     },
+
+    async getActiveBoard({ commit, dispatch }, boardId) {
+      try {
+        let res = await api.get(`/boards/${boardId}`)
+        commit('setActiveBoard', res.data)
+      } catch (error) {
+        console.error(error)
+
+      }
+
+    },
     addBoard({ commit, dispatch }, boardData) {
       api.post('boards', boardData)
         .then(serverBoard => {
           dispatch('getBoards')
         })
-    }
+    },
     //#endregion
 
 
     //#region -- LISTS --
-getLists({ commit, dispatch }) {
+    async getLists({ commit, dispatch }, boardId) {
       try {
-        let res = await api.get('lists')
+        let res = await api.get(`/boards/${boardId}/lists`)
         commit('setLists', res.data)
       } catch (error) {
+        console.error(error)
+      }
+    },
+    async addList({ dispatch }, data) {
+      try {
+        let res = await api.post(`/lists`, data)
+        dispatch('getLists', data.boardId)
+      } catch (error) {
+        console.error(error)
 
       }
+    },
 
+
+
+    //#endregion
+
+    //#region --TASKS--
+    async getTasks({ commit, dispatch }, payload) {
+      try {
+        let res = await api.get(`/lists/${payload}/tasks`)
+        commit('setTasks', res.data)
+      } catch (error) { console.error(error) }
     }
 
     //#endregion
