@@ -27,10 +27,9 @@ export default class TaskController {
       req.body.authorId = req.session.uid
       let data = await _taskService.create(req.body)
       return res.send(data)
-    } catch (error) {
-      console.error(error)
-    }
+    } catch (error) { next(error) }
   }
+
 
   async createComment(req, res, next) {
     try {

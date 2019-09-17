@@ -2,12 +2,15 @@
   <div>
     <h1>{{listProp.title}}</h1>
     <task v-for="task in tasks" :taskProp="task" :key="task._id" />
+    <CreateTaskModal :list="listProp" />
+    <button class="btn btn-success" data-toggle="modal" data-target="#create-task-modal">Add Task</button>
   </div>
 </template>
 
 
 <script>
 import Task from "../components/Task";
+import CreateTaskModal from "../components/CreateTaskModal";
 export default {
   name: "List",
   props: ["listProp"],
@@ -17,10 +20,10 @@ export default {
 
   computed: {
     tasks() {
-      return this.$store.state.tasks;
+      return this.$store.state.tasks[this.listProp._id]; //this is getting the task at the specific list ID
     }
   },
-  components: { Task }
+  components: { Task, CreateTaskModal }
 };
 </script>
 
