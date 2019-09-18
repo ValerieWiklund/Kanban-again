@@ -19,14 +19,15 @@ _schema.pre('deleteMany', function (next) {
 })
 
 //CASCADE ON DELETE
-_schema.pre('findOneAndRemove', function (next) {
+_schema.pre('findOneAndRemove', async function () {
   //lets find all the lists and remove them
-  Promise.all([
-    // _taskRepo.deleteMany({ boardId: this._conditions._id })
-  ])
-    .then(() => next())
-    .catch(err => next(err))
+  try {
+    Promise.all([
+      _taskRepo.deleteMany({ boardId: this._conditions._id })
+    ])
+  } catch (error) { next(err) }
 })
+
 
 export default class ListService {
   get repository() {

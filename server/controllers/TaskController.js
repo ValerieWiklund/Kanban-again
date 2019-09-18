@@ -15,7 +15,8 @@ export default class TaskController {
       // .get('/:id/tasks', this.getAllTasks)
       // .get('/:id', this.getById)
       .post('', this.create)
-      .put('/:id/comments', this.createComment)
+      .post('/:id/comments', this.createComment)
+      .put('/:id/comments', this.deleteComment)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
     // .use(this.defaultRoute)
@@ -29,12 +30,24 @@ export default class TaskController {
       return res.send(data)
     } catch (error) { next(error) }
   }
-
-
   async createComment(req, res, next) {
     try {
       req.body.authorId = req.session.uid
       let data = await _taskService.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, { $push: { comments: req.body } }, { new: true })
+      if (data) {
+        return res.send(data)
+      }
+
+    } catch (error) {
+      console.error(error)
+
+    }
+  }
+  async deleteComment(req, res, next) {
+    try {
+      req.body.authorId = req.session.uid
+      // let data = await _taskService.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, { $pull: { comments: {_id: req.params.cId }} }, { new: true })
+      let data = await _taskService.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, { $pull: { comments: {_id: req.body._id} } }, { new: true })
       if (data) {
         return res.send(data)
       }

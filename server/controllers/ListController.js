@@ -13,11 +13,8 @@ export default class ListController {
     this.router = express.Router()
       .use(Authorize.authenticated)
       .get('/:id/tasks', this.getAllTasks)
-      // .get('/:id', this.getById)
       .post('/', this.create)
-      // .put('/:id', this.edit)
       .delete('/:id', this.delete)
-    // .use(this.defaultRoute)
   }
 
 

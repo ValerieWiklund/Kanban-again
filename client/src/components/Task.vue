@@ -3,6 +3,7 @@
     <h3>{{taskProp.description}}</h3>
     <div v-for="comment in taskProp.comments" :key="comment._id">
       <p>{{comment.description}}</p>
+    <button class= "btn btn-danger" @click= "deleteComment(comment)">Delete Comment</button>
     </div>
     <CreateCommentModal :task="taskProp" />
     <button
@@ -27,8 +28,13 @@ export default {
   methods: {
     deleteTask(task){
       this.$store.dispatch('deleteTask', task)
+    },
+    deleteComment(c){
+      c.listId = this.taskProp.listId
+      this.$store.dispatch('deleteComment', c)
     }
   },
+
   components: { CreateCommentModal }
 };
 </script>

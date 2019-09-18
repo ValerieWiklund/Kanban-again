@@ -146,7 +146,7 @@ export default new Vuex.Store({
       try {
         let res = await api.delete(`tasks/${data._id}`)
         dispatch('getTasks', data.listId)
-      } catch (error) {console.error(error)}
+      } catch (error) { console.error(error) }
     },
     //#endregion
 
@@ -154,12 +154,21 @@ export default new Vuex.Store({
 
     async addComment({ dispatch }, data) {
       try {
-        let res = await api.put(`tasks/${data.taskId}/comments`, data)
-        dispatch('get', data.listId)
+        let res = await api.post(`tasks/${data.taskId}/comments`, data)
+        dispatch('getTasks', data.listId)
 
       } catch (error) {
         console.error(error)
 
+      }
+    },
+    async deleteComment({ dispatch }, data) {
+      try {
+        let res = await api.put(`tasks/${data.listId}/comments`, data)
+        dispatch('getTasks', data.listId)
+      } catch (error) {
+        console.error(error)
+  
       }
     }
 
