@@ -121,9 +121,6 @@ export default new Vuex.Store({
 
       }
     },
-
-
-
     //#endregion
 
     //#region --TASKS--
@@ -143,7 +140,24 @@ export default new Vuex.Store({
         let res = await api.post('/tasks', data)
         dispatch('getTasks', data.listId)
       } catch (error) { console.error(error) }
+    },
+    //#endregion
+
+    //#region --COMMENTS--
+
+    async addComment({ dispatch }, data) {
+      try {
+        debugger
+
+        let res = await api.put(`tasks/${data.taskId}/comments`, data)
+        dispatch('getTasks', data.listId)
+
+      } catch (error) {
+        console.error(error)
+
+      }
     }
+
     //#endregion
   }
 })

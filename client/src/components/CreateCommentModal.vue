@@ -1,15 +1,15 @@
 <template>
-  <div id="create-task-modal" class="modal" tabindex="-1" role="dialog">
+  <div :id="'create-comment-modal'+task._id" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Add Task</h5>
+          <h5 class="modal-title">Add comment</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="addTask()">
+          <form @submit.prevent="addComment()">
             <div class="form-group">
               <label for="description">Description</label>
               <input
@@ -17,7 +17,7 @@
                 class="form-control"
                 id="description"
                 placeholder="Enter description"
-                v-model="newTask.description"
+                v-model="newComment.description"
                 required
               />
             </div>
@@ -32,20 +32,20 @@
 
 <script>
 export default {
-  name: "create-task-modal",
+  name: "create-comment-modal",
   data() {
     return {
-      newTask: {}
+      newComment: {}
     };
   },
-  props: ["list"],
+  props: ["task"],
   computed: {},
   methods: {
-    addTask() {
-      this.newTask.listId = this.list._id;
-      this.newTask.boardId = this.list.boardId;
-      this.$store.dispatch("addTask", this.newTask);
-      this.newTask = {}; //empties the object in the modal
+    addComment() {
+      this.newComment.taskId = this.task._id;
+      this.newComment.listId = this.task.listId;
+      this.$store.dispatch("addComment", this.newComment);
+      this.newComment = {}; //empties the object in the modal
     }
   },
   components: {}
