@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
       <div class="board">
         {{board.title}}
         <CreateListModal />
@@ -10,9 +9,8 @@
           data-target="#create-list-modal"
         >Create List</button>
         <list v-for="list in lists" :listProp="list" :key="list._id" />
-      </div>
     </div>
-  </div>
+      </div> 
 </template>
 
 <script>

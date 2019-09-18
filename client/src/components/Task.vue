@@ -30,8 +30,8 @@ export default {
       this.$store.dispatch('deleteTask', task)
     },
     deleteComment(comment){
-      c.taskId = this.taskProp._id
-      c.listId = this.taskProp.listId
+      comment.taskId = this.taskProp._id
+      comment.listId = this.taskProp.listId
       this.$store.dispatch('deleteComment', comment)
     }
   },

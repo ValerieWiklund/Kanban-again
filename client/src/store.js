@@ -42,6 +42,9 @@ export default new Vuex.Store({
       Vue.set(state.tasks, data.listId, data.tasks)
       // state.tasks[data.listId] = data.tasks (read through vue.set docs)
     },
+    resetState(state) {
+      state.user = {}
+    }
   },
   actions: {
     //#region -- AUTH STUFF --

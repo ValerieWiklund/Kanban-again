@@ -1,10 +1,12 @@
 <template>
   <div>
+    <div class="col-6 border">
     <h1>{{listProp.title}}</h1>
     <task v-for="task in tasks" :taskProp="task" :key="task._id" />
     <CreateTaskModal :list="listProp" />
     <button class="btn btn-success" data-toggle="modal" data-target="#create-task-modal">Add Task</button>
-  </div>
+    </div>
+    </div>
 </template>
 
 
