@@ -164,7 +164,7 @@ export default new Vuex.Store({
     },
     async deleteComment({ dispatch }, data) {
       try {
-        let res = await api.put(`tasks/${data.listId}/comments`, data)
+        let res = await api.put(`tasks/${data.taskId}/comments`, data)
         dispatch('getTasks', data.listId)
       } catch (error) {
         console.error(error)

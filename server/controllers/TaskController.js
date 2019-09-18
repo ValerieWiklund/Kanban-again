@@ -38,24 +38,18 @@ export default class TaskController {
         return res.send(data)
       }
 
-    } catch (error) {
-      console.error(error)
-
-    }
+    } catch (error) { next(error) }
   }
   async deleteComment(req, res, next) {
     try {
       req.body.authorId = req.session.uid
-      // let data = await _taskService.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, { $pull: { comments: {_id: req.params.cId }} }, { new: true })
-      let data = await _taskService.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, { $pull: { comments: {_id: req.body._id} } }, { new: true })
+      let data = await _taskService.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, { $pull: { comments: req.body } }, { new: true })
       if (data) {
         return res.send(data)
       }
+      throw new Error('Invalid data')
+    } catch (error) { next(error) }
 
-    } catch (error) {
-      console.error(error)
-
-    }
   }
   async edit(req, res, next) {
     try {
