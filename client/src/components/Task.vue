@@ -10,6 +10,7 @@
       data-toggle="modal"
       :data-target="'#create-comment-modal'+taskProp._id"
     >Add Comment</button>
+    <button class= "btn btn-danger" @click= "deleteTask(taskProp)">Delete Task</button>
   </div>
 </template>
 
@@ -23,7 +24,11 @@ export default {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {
+    deleteTask(task){
+      this.$store.dispatch('deleteTask', task)
+    }
+  },
   components: { CreateCommentModal }
 };
 </script>

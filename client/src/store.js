@@ -141,16 +141,21 @@ export default new Vuex.Store({
         dispatch('getTasks', data.listId)
       } catch (error) { console.error(error) }
     },
+
+    async deleteTask({ dispatch }, data) {
+      try {
+        let res = await api.delete(`tasks/${data._id}`)
+        dispatch('getTasks', data.listId)
+      } catch (error) {console.error(error)}
+    },
     //#endregion
 
     //#region --COMMENTS--
 
     async addComment({ dispatch }, data) {
       try {
-        debugger
-
         let res = await api.put(`tasks/${data.taskId}/comments`, data)
-        dispatch('getTasks', data.listId)
+        dispatch('get', data.listId)
 
       } catch (error) {
         console.error(error)
