@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
 
       <div class="board">
-        <h1>{{board.title}}</h1>
+        <h1>{{board.title}}<span class="btn" @click= "deleteBoard()">X</span></h1>
         <CreateListModal />
         <button
           class="btn btn-success"
