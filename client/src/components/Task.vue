@@ -11,8 +11,14 @@
       data-toggle="modal"
       :data-target="'#create-comment-modal'+taskProp._id"
     >Add Comment</button>
+
+<select v-model="newListId" @change="moveTask">
+  <option disabled value="">Move Task</option>
+  <option v-for="list in lists" :value="list._id" :key="list._id">{{list.title}}</option>
+
+</select>
  
-  </div>
+</div>
 </template>
 
 
@@ -22,9 +28,15 @@ export default {
   name: "task",
   props: ["taskProp"],
   data() {
-    return {};
+    return {
+      newListId: ""
+    };
   },
-  computed: {},
+  computed: {
+    lists(){
+      return this.$store.state.lists
+    }
+  },
   methods: {
     deleteTask(task){
       this.$store.dispatch('deleteTask', task)
@@ -33,6 +45,14 @@ export default {
       comment.taskId = this.taskProp._id
       comment.listId = this.taskProp.listId
       this.$store.dispatch('deleteComment', comment)
+    },
+    moveTask(){
+      let payload={
+        currentListId: this.taskProp.listId,
+        listId: this.newListId,
+        taskId: this.taskProp._id
+      }
+      this.$store.dispatch('moveTask', payload)
     }
   },
 

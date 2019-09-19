@@ -103,6 +103,14 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     },
+    async deleteBoard({ dispatch }, data) {
+      try {
+        debugger
+        let res = await api.delete(`/boards/${data._id}`)
+        dispatch('getBoards')
+        router.push({name:'boards'})
+      } catch (error) { console.error(error)}
+    },
     //#endregion
 
 
@@ -123,6 +131,12 @@ export default new Vuex.Store({
         console.error(error)
 
       }
+    },
+    async deleteList({ dispatch }, data) {
+      try {
+        let res = await api.delete(`/lists/${data._id}`)
+        dispatch('getLists', data.boardId)
+      } catch (error) { console.error(error) }
     },
     //#endregion
 
@@ -151,6 +165,14 @@ export default new Vuex.Store({
         dispatch('getTasks', data.listId)
       } catch (error) { console.error(error) }
     },
+    async moveTask({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put(`tasks/${payload.taskId}`, payload)
+        dispatch('getTasks', payload.currentListId)
+        dispatch('getTasks', payload.listId)
+      } catch (error) { console.error(error) }
+    },
+//set task to new listId
     //#endregion
 
     //#region --COMMENTS--

@@ -3,6 +3,7 @@
 
       <h1>{{listProp.title}}</h1>
       <CreateTaskModal :list="listProp" />
+      <button class="btn btn-danger" @click="deleteList(listProp)">Delete List</button>
       <task v-for="task in tasks" :taskProp="task" :key="task._id" />
       <button
         class="btn btn-success"
@@ -30,8 +31,14 @@ export default {
       return this.$store.state.tasks[this.listProp._id]; //this is getting the task at the specific list ID
     }
   },
-  components: { Task, CreateTaskModal }
+  components: { Task, CreateTaskModal },
+  methods: {
+      deleteList(list){
+      this.$store.dispatch('deleteList', list)
+    },
+  }
 };
+
 </script>
 
 <style scoped>

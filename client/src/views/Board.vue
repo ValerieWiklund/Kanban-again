@@ -1,9 +1,8 @@
 <template>
   <div class="container-fluid">
     <div class="row justify-content-center">
-
       <div class="board">
-        <h1>{{board.title}}<span class="btn" @click= "deleteBoard()">X</span></h1>
+        <h1>{{board.title}}<span class="btn" @click= "deleteBoard(board)">X</span></h1>
         <CreateListModal />
         <button
           class="btn btn-success"
@@ -40,6 +39,11 @@ export default {
     },
     lists() {
       return this.$store.state.lists;
+    }
+  },
+  methods: {
+      deleteBoard(board){
+      this.$store.dispatch('deleteBoard', board)
     }
   },
   components: { List, CreateListModal }
