@@ -1,16 +1,21 @@
 <template>
   <div class="container-fluid">
+    <div class="row justify-content-center">
+
       <div class="board">
-        {{board.title}}
+        <h1>{{board.title}}</h1>
         <CreateListModal />
         <button
           class="btn btn-success"
           data-toggle="modal"
           data-target="#create-list-modal"
         >Create List</button>
-        <list v-for="list in lists" :listProp="list" :key="list._id" />
     </div>
-      </div> 
+    </div>
+    <div class="row">
+        <list v-for="list in lists" :listProp="list" :key="list._id" />
+      </div>
+    </div>
 </template>
 
 <script>

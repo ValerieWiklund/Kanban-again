@@ -1,9 +1,9 @@
 <template>
   <div class="task">
-    <h3>{{taskProp.description}}</h3>
+    <h3>{{taskProp.description}}<button class="btn btn-sm" @click= "deleteTask(taskProp)">X</button></h3>
     <div v-for="comment in taskProp.comments" :key="comment._id">
-      <p>{{comment.description}}</p>
-    <button class= "btn btn-danger" @click= "deleteComment(comment)">Delete Comment</button>
+      <p>{{comment.description}}<button class= "btn btn-sm" @click= "deleteComment(comment)">X</button></p>
+    
     </div>
     <CreateCommentModal :task="taskProp" />
     <button
@@ -11,7 +11,7 @@
       data-toggle="modal"
       :data-target="'#create-comment-modal'+taskProp._id"
     >Add Comment</button>
-    <button class= "btn btn-danger" @click= "deleteTask(taskProp)">Delete Task</button>
+ 
   </div>
 </template>
 
