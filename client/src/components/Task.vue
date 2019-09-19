@@ -1,8 +1,8 @@
 <template>
   <div class="task">
-    <h3>{{taskProp.description}}<button class="btn btn-sm" @click= "deleteTask(taskProp)">X</button></h3>
+    <h3>{{taskProp.description}}<span class="btn btn-sm" @click= "deleteTask(taskProp)">X</span></h3>
     <div v-for="comment in taskProp.comments" :key="comment._id">
-      <p>{{comment.description}}<button class= "btn btn-sm" @click= "deleteComment(comment)">X</button></p>
+    <p>{{comment.description}}<span class= "btn btn-sm" @click= "deleteComment(comment)">X</span></p>
     
     </div>
     <CreateCommentModal :task="taskProp" />
