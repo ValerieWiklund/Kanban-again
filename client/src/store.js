@@ -105,12 +105,13 @@ export default new Vuex.Store({
     },
     async deleteBoard({ dispatch }, data) {
       try {
-        debugger
         let res = await api.delete(`/boards/${data._id}`)
         dispatch('getBoards')
         router.push({name:'boards'})
       } catch (error) { console.error(error)}
     },
+
+
     //#endregion
 
 

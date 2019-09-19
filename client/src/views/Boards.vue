@@ -1,14 +1,15 @@
 <template>
-  <div class="boards">
+  <div class="boards mt-5">
+    <img src="../assets/background.jpg" alt="">
     WELCOME TO THE BOARDS!!!
     <form @submit.prevent="addBoard">
       <input type="text" placeholder="title" v-model="newBoard.title" required />
       <input type="text" placeholder="description" v-model="newBoard.description" />
-      <button type="submit">Create Board</button>
+      <button class="btn btn-success" type="submit">Create Board</button>
       <button class="btn btn-danger" @click="logout">Logout</button>
     </form>
     <div v-for="board in boards" :key="board._id">
-      <router-link :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}</router-link>
+      <router-link class="board-list" :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}</router-link><span class="btn" @click= "deleteBoard(board)"><i class="far fa-times-circle"></i></span>
     </div>
   </div>
 </template>
@@ -39,7 +40,17 @@ export default {
     },
     logout(){
       this.$store.dispatch("logout")
+    },
+    deleteBoard(board){
+      this.$store.dispatch('deleteBoard', board)
     }
   }
 };
 </script>
+
+
+<style scoped>
+.board-list{
+  font-size: 25px
+}
+</style>

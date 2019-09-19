@@ -46,6 +46,7 @@ export default {
       this.newTask.boardId = this.list.boardId;
       this.$store.dispatch("addTask", this.newTask);
       this.newTask = {}; //empties the object in the modal
+      $(".close").click()
     }
   },
   components: {}

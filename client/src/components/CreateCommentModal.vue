@@ -46,6 +46,7 @@ export default {
       this.newComment.listId = this.task.listId;
       this.$store.dispatch("addComment", this.newComment);
       this.newComment = {}; //empties the object in the modal
+      $(".close").click()
     }
   },
   components: {}

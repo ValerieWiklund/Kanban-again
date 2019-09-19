@@ -51,6 +51,7 @@ export default {
       this.newList.boardId = this.board._id;
       this.$store.dispatch("addList", this.newList);
       this.newList = {};
+      $(".close").click()
     }
   },
   components: {}
