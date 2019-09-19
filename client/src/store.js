@@ -171,7 +171,7 @@ export default new Vuex.Store({
         dispatch('getTasks', data.listId)
       } catch (error) {
         console.error(error)
-  
+
       }
     }
 
