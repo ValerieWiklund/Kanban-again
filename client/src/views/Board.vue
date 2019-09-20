@@ -1,12 +1,14 @@
 <template>
   <div class="container-fluid">
+    <div class="centered">
+    <h1 class="position size">{{board.title}}<br/><h3>{{board.description}}</h3></h1>
+  
+    </div>
     <div class="row justify-content-center">
       <div class="board">
-        <h1>{{board.title}}</h1>
-        <h4>{{board.description}}</h4>
         <CreateListModal />
         <button
-          class="btn btn-success"
+          class="btn btn-danger btn-sm mt-4"
           data-toggle="modal"
           data-target="#create-list-modal"
         >Create List</button>
@@ -47,3 +49,23 @@ export default {
   components: { List, CreateListModal }
 };
 </script>
+
+
+<style scoped>
+.centered{
+  background-image: url('../assets/kanbanheader.png');
+  background-size: cover;
+  height: 30vh;
+}
+.position{
+  position: absolute;
+  top:15%;
+  left:45%;
+  transform: translate(-50%, -50%)
+}
+.size{
+  font-size: 50px;
+}
+
+
+</style>

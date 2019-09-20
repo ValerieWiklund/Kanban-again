@@ -1,28 +1,7 @@
 <template>
-  <!-- <div class="task">
-    <h3>{{taskProp.description}}<span class="btn btn-sm" @click= "deleteTask(taskProp)">X</span></h3>
-    <div v-for="comment in taskProp.comments" :key="comment._id">
-    <p><p>{{comment.description}}<span class= "btn btn-sm" @click= "deleteComment(comment)">X</span></p></p>
-    
-    </div>
-    <CreateCommentModal :task="taskProp" />
-    <button
-      class="btn btn-success"
-      data-toggle="modal"
-      :data-target="'#create-comment-modal'+taskProp._id"
-    >Add Comment</button>
-
-<select v-model="newListId" @change="moveTask">
-  <option disabled value="">Move Task</option>
-  <option v-for="list in lists" :value="list._id" :key="list._id">{{list.title}}</option>
-
-</select>
- 
-</div> -->
-
 <div class="card task mb-3">
   <div class="card-header">
-    <h3>{{taskProp.description}}<span class="btn" @click= "deleteTask(taskProp)"><i class="far fa-times-circle fa-1x"></i></span></h3>
+    <h4>{{taskProp.description}}<span class="btn" @click= "deleteTask(taskProp)"><i class="far fa-times-circle fa-1x"></i></span></h4>
 <select v-model="newListId" @change="moveTask">
   <option disabled value="">Move Task</option>
   <option v-for="list in lists" :value="list._id" :key="list._id">{{list.title}}</option>
@@ -35,7 +14,7 @@
 </div>
     <CreateCommentModal :task="taskProp" />
     <button
-      class="btn btn-success"
+      class="btn btn-secondary btn-sm"
       data-toggle="modal"
       :data-target="'#create-comment-modal'+taskProp._id"
     >Add Comment</button>
@@ -83,4 +62,7 @@ export default {
 
 
 <style scoped>
+.card-header{
+  background-color: white;
+}
 </style>
