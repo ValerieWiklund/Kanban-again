@@ -16,7 +16,7 @@
         >Create List</button>
     </div>
     </div>
-    <div class="row">
+    <div class="row mx-2">
         <list v-for="list in lists" :listProp="list" :key="list._id" />
       </div>
     </div>

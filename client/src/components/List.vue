@@ -1,6 +1,6 @@
 <template>
 <div class="col-3 pt-3">
-<div class="card">
+<div class="card shadow">
   <div class="card-header ">
    <h2>{{listProp.title}} <span class="btn btn-sm" @click="deleteList(listProp)"><i class="far fa-times-circle fa-2x"></i></span></h2>
   </div>
