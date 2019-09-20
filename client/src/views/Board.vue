@@ -1,7 +1,9 @@
 <template>
-  <div class="container-fluid">
-    
+  <div>
     <div class="centered">
+          <div class="d-flex justify-content-start">
+         <button @click="backNav"><i class="fas fa-arrow-circle-left fa-2x"></i></button>
+         </div>
     <h1 class="position size">{{board.title}}<br/><h3>{{board.description}}</h3></h1>
     </div>
     <div class="row justify-content-center">
@@ -45,6 +47,9 @@ export default {
     }
   },
   methods: {
+      backNav(){
+      this.$store.dispatch("backNav")
+    },
   },
   components: { List, CreateListModal }
 };

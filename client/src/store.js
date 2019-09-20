@@ -111,7 +111,11 @@ export default new Vuex.Store({
       } catch (error) { console.error(error)}
     },
 
-    
+    async backNav({ dispatch }) {
+      let res = await api.get('boards')
+      dispatch('getBoards')
+      router.push({name:'boards'})
+    },
 
     //#endregion
 
