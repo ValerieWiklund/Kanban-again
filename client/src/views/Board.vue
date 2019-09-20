@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
+    
     <div class="centered">
     <h1 class="position size">{{board.title}}<br/><h3>{{board.description}}</h3></h1>
-  
     </div>
     <div class="row justify-content-center">
       <div class="board">
