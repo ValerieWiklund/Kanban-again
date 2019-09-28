@@ -1,10 +1,16 @@
 <template>
   <div>
     <div class="centered">
-          <div class="d-flex justify-content-start">
-         <button @click="backNav"><i class="fas fa-arrow-circle-left fa-2x"></i></button>
-         </div>
-    <h1 class="position size">{{board.title}}<br/><h3>{{board.description}}</h3></h1>
+      <div class="d-flex justify-content-start">
+        <button @click="backNav">
+          <i class="fas fa-arrow-circle-left fa-2x"></i>
+        </button>
+      </div>
+      <h1 class="position size">
+        {{board.title}}
+        <br />
+        <h3>{{board.description}}</h3>
+      </h1>
     </div>
     <div class="row justify-content-center">
       <div class="board">
@@ -14,12 +20,12 @@
           data-toggle="modal"
           data-target="#create-list-modal"
         >Create List</button>
-    </div>
-    </div>
-    <div class="row mx-2">
-        <list v-for="list in lists" :listProp="list" :key="list._id" />
       </div>
     </div>
+    <div class="row mx-2">
+      <list v-for="list in lists" :listProp="list" :key="list._id" />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -47,9 +53,9 @@ export default {
     }
   },
   methods: {
-      backNav(){
-      this.$store.dispatch("backNav")
-    },
+    backNav() {
+      this.$store.dispatch("backNav");
+    }
   },
   components: { List, CreateListModal }
 };
@@ -57,20 +63,18 @@ export default {
 
 
 <style scoped>
-.centered{
-  background-image: url('../assets/kanbanheader.png');
+.centered {
+  background-image: url("../assets/kanbanheader.png");
   background-size: cover;
   height: 30vh;
 }
-.position{
+.position {
   position: absolute;
-  top:15%;
-  left:45%;
-  transform: translate(-50%, -50%)
+  top: 15%;
+  left: 45%;
+  transform: translate(-50%, -50%);
 }
-.size{
+.size {
   font-size: 50px;
 }
-
-
 </style>
